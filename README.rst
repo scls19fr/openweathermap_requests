@@ -35,7 +35,7 @@ OpenWeatherMap Requests
 =======================
 
 `Python <https://www.python.org/>`__ package to fetch data from ` OpenWeatherMap.org <http://openweathermap.org/>`__
-and get Pandas DataFrame <http://pandas.pydata.org/>`__ with weather history.
+and get `Pandas DataFrame <http://pandas.pydata.org/>`__ with weather history.
 
 Links
 -----
