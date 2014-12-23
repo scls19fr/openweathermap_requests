@@ -3,3 +3,4 @@ nose
 pandas
 requests
 requests-cache
+click
