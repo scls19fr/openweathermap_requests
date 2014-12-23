@@ -269,16 +269,16 @@ and pass it us using either --api_key or using environment variable %r" % ENV_VA
     
     pp = pprint.PrettyPrinter(indent=4)
     
-    cache = 'cache-openweathermap'
+    cache_name = 'cache-openweathermap'
     if range=='':
-        #ow = OpenWeatherMapRequests(api_key=api_key, cache='openweathermaps-cache', expire_after=datetime.timedelta(minutes=5))
-        ow = OpenWeatherMapRequests(api_key=api_key, cache=cache, expire_after=5*60)
+        #ow = OpenWeatherMapRequests(api_key=api_key, cache_name='openweathermaps-cache', expire_after=datetime.timedelta(minutes=5))
+        ow = OpenWeatherMapRequests(api_key=api_key, cache_name=cache_name, expire_after=5*60)
         logging.info("get_weather")
         data = ow.get_weather(lon=lon, lat=lat)
         pp.pprint(data)
 
     else:
-        ow = OpenWeatherMapRequests(api_key=api_key, cache=cache, expire_after=None) # no expiration for history
+        ow = OpenWeatherMapRequests(api_key=api_key, cache_name=cache_name, expire_after=None) # no expiration for history
         range = range.split(':')
         range = map(pd.to_datetime, range)
         if len(range)==1:
