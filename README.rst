@@ -66,16 +66,22 @@ Library Usage
 
 ::
 
+    import datetime
+    from openweathermap_requests import OpenWeatherMapRequests
+
     ow = OpenWeatherMapRequests(api_key='...', cache_name='cache-openweathermap', expire_after=5*60)
 
     print(ow.get_weather(lon=lon, lat=lat))  # display current weather data
 
     (lon, lat) = (0.34189, 46.5798114) # Poitiers
-    stations = ow.find_stations_near(lon=lon, lat=lat, cnt=10) # get 10 nearest stations from
+    stations = ow.find_stations_near(lon=lon, lat=lat, cnt=10) # get 10 nearest stations from coordinates (lon, lat)
 
-    station_id = stations.iloc[0]['station.id']
+    station_id = stations.iloc[0]['station.id'] # get station_id of nearest station
 
-    data = ow.get_historic_weather(station_id, start_date, end_date)
+    start_date = datetime.datetime(2014, 1, 1)
+    end_date = datetime.datetime(2014, 6, 1)
+
+    data = ow.get_historic_weather(station_id, start_date, end_date) # get historic weather from start date to end date
 
 
 Links
