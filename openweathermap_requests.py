@@ -254,9 +254,10 @@ class OpenWeatherMapRequests(object):
 @click.option('--api_key', default='', help=u"API Key for Wunderground")
 @click.option('--lon', default=0.34189, help=u"Longitude")
 @click.option('--lat', default=46.5798114, help=u"Latitude")
+@click.option('--count', default=1, help=u"Weather station count")
 #@click.option('--place', default='Poitiers', help=u"Place")
 @click.option('--range', default='', help=u"Date range (YYYYMMDD:YYYYMMDD) or date (YYYYMMDD) or '' (current weather)")
-def main(api_key, lon, lat, range):
+def main(api_key, lon, lat, count, range):
     logging.info("OpenWeatherMaps.org - API fetch with Requests and Requests-cache")
 
     if api_key=='':
@@ -271,11 +272,17 @@ and pass it us using either --api_key or using environment variable %r" % ENV_VA
     
     cache_name = 'cache-openweathermap'
     if range=='':
-        #ow = OpenWeatherMapRequests(api_key=api_key, cache_name='openweathermaps-cache', expire_after=datetime.timedelta(minutes=5))
-        ow = OpenWeatherMapRequests(api_key=api_key, cache_name=cache_name, expire_after=5*60)
-        logging.info("get_weather")
-        data = ow.get_weather(lon=lon, lat=lat)
-        pp.pprint(data)
+        if count==1:
+            #ow = OpenWeatherMapRequests(api_key=api_key, cache_name='openweathermaps-cache', expire_after=datetime.timedelta(minutes=5))
+            ow = OpenWeatherMapRequests(api_key=api_key, cache_name=cache_name, expire_after=5*60)
+            logging.info("get_weather")
+            data = ow.get_weather(lon=lon, lat=lat)
+            pp.pprint(data)
+        else:
+            ow = OpenWeatherMapRequests(api_key=api_key, cache_name=cache_name, expire_after=24*60*60)
+            logging.info("find_stations_near")
+            data = ow.find_stations_near(lon=lon, lat=lat, cnt=count)
+            print(data)
 
     else:
         ow = OpenWeatherMapRequests(api_key=api_key, cache_name=cache_name, expire_after=None) # no expiration for history
