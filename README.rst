@@ -64,6 +64,18 @@ $ python openweathermap_requests.py --lon 0.34189 --lat 46.5798114 --range 20140
 Library Usage
 -------------
 
+::
+
+    ow = OpenWeatherMapRequests(api_key='...', cache_name='cache-openweathermap', expire_after=5*60)
+
+    print(ow.get_weather(lon=lon, lat=lat))  # display current weather data
+
+    (lon, lat) = (0.34189, 46.5798114) # Poitiers
+    stations = ow.find_stations_near(lon=lon, lat=lat, cnt=10) # get 10 nearest stations from
+
+    station_id = stations.iloc[0]['station.id']
+
+    data = ow.get_historic_weather(station_id, start_date, end_date)
 
 
 Links
