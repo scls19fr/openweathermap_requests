@@ -67,13 +67,17 @@ Library Usage
 ::
 
     import datetime
+    import logging
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
     from openweathermap_requests import OpenWeatherMapRequests
 
     ow = OpenWeatherMapRequests(api_key='', cache_name='cache-openweathermap', expire_after=5*60)
 
+    (lon, lat) = (0.34189, 46.5798114) # Poitiers
+
     print(ow.get_weather(lon=lon, lat=lat))  # display current weather data
 
-    (lon, lat) = (0.34189, 46.5798114) # Poitiers
     stations = ow.find_stations_near(lon=lon, lat=lat, cnt=10) # get 10 nearest stations from coordinates (lon, lat)
 
     station_id = stations.iloc[0]['station.id'] # get station_id of nearest station
