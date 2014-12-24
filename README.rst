@@ -47,18 +47,18 @@ Get current weather data
 
 ::
 
-$ python openweathermap_requests.py --lon 0.34189 --lat 46.5798114
+    $ python openweathermap_requests.py --lon 0.34189 --lat 46.5798114
 
 
 Historical weather data
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Fetch historical weather data from nearest weather station of coordinates (lon=0.34189, lat=46.5798114) 
-from 2014/01/01 to 2014/12/01 using
+from 2014/01/01 to 2014/12/01 using:
 
 ::
 
-$ python openweathermap_requests.py --lon 0.34189 --lat 46.5798114 --range 20140101:20141201
+    $ python openweathermap_requests.py --lon 0.34189 --lat 46.5798114 --range 20140101:20141201
 
 
 Library Usage
