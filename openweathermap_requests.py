@@ -303,12 +303,14 @@ and pass it us using either --api_key or using environment variable %r" % ENV_VA
 
         format = "%Y%m%d"
         range_str = "%s_%s" % (start_date.strftime(format), end_date.strftime(format))
-        filename = "openweathermap_%s_%s_%s.xls" % (lon, lat, range_str)
-        logging.info("Creating file %s" % filename)
-        data.to_excel(filename, engine='openpyxl') # see https://github.com/pydata/pandas/issues/9139
+
         filename = "openweathermap_%s_%s_%s.csv" % (lon, lat, range_str)
         logging.info("Creating file %s" % filename)
         data.to_csv(filename)
+
+        filename = "openweathermap_%s_%s_%s.xls" % (lon, lat, range_str)
+        logging.info("Creating file %s" % filename)
+        data.to_excel(filename, engine='openpyxl') # see https://github.com/pydata/pandas/issues/9139
 
 if __name__ == '__main__':
     basepath = os.path.dirname(__file__)
