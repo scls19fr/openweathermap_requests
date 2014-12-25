@@ -289,7 +289,7 @@ and pass it us using either --api_key or using environment variable %r" % ENV_VA
         range = range.split(':')
         range = map(pd.to_datetime, range)
         if len(range)==1:
-            range.append(range[0])
+            range.append(range[0]+datetime.timedelta(days=1))
         logging.info("get_historic_weather")
         start_date = range[0]
         end_date = range[1]
@@ -305,7 +305,7 @@ and pass it us using either --api_key or using environment variable %r" % ENV_VA
         range_str = "%s_%s" % (start_date.strftime(format), end_date.strftime(format))
         filename = "openweathermap_%s_%s_%s.xls" % (lon, lat, range_str)
         logging.info("Creating file %s" % filename)
-        data.to_excel(filename)
+        data.to_excel(filename, engine='openpyxl') # see https://github.com/pydata/pandas/issues/9139
         filename = "openweathermap_%s_%s_%s.csv" % (lon, lat, range_str)
         logging.info("Creating file %s" % filename)
         data.to_csv(filename)
