@@ -19,6 +19,16 @@ import collections
 
 ENV_VAR_API_KEY = 'OPEN_WEATHER_MAP_API_KEY'
 
+def get_api_key(api_key=''):
+    if api_key=='':
+        try:
+            return(os.environ[ENV_VAR_API_KEY])
+        except:
+            logging.warning("You should get an API key from OpenWeatherMap.org and pass it us using either --api_key or using environment variable %r" % ENV_VAR_API_KEY)
+            return(None)
+    else:
+        return(api_key)
+
 class RequestsCachedSessionWithLog(requests_cache.CachedSession):
     """
     Requests Session with log and cache mechanism

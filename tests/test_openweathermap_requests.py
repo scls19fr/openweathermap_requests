@@ -6,10 +6,13 @@ from nose.tools import raises, with_setup, eq_, ok_
 import openweathermap_requests
 from openweathermap_requests import *
 import datetime
+#import logging
 
 def create_open_weather_map():
     "set up test fixtures"
-    api_key = os.environ[openweathermap_requests.ENV_VAR_API_KEY]
+    #logger = logging.getLogger()
+    #logger.setLevel(logging.DEBUG)
+    api_key = get_api_key()
     (lon, lat) = (0.34189, 46.5798114) # Poitiers (LFBI / 5530)
     ow = OpenWeatherMapRequests(api_key=api_key)
     return(ow, lon, lat)

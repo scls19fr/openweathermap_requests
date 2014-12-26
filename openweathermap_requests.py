@@ -6,7 +6,7 @@ import os
 import logging
 import logging.config
 import traceback
-from openweathermap_requests import OpenWeatherMapRequests, ENV_VAR_API_KEY
+from openweathermap_requests import OpenWeatherMapRequests, get_api_key
 import pprint
 
 @click.command()
@@ -20,12 +20,7 @@ import pprint
 def main(api_key, lon, lat, count, range):
     logging.info("OpenWeatherMaps.org - API fetch with Requests and Requests-cache")
 
-    if api_key=='':
-        try:
-            api_key = os.environ[ENV_VAR_API_KEY]
-        except:
-            logging.warning("You should get an API key from OpenWeatherMap.org and pass it us using either --api_key or using environment variable %r" % ENV_VAR_API_KEY)
-            api_key = None
+    api_key = get_api_key(api_key)
     
     pp = pprint.PrettyPrinter(indent=4)
     
