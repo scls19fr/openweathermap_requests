@@ -14,6 +14,7 @@ __version__ = "0.0.2"
 __maintainer__ = "Sébastien Celles"
 __email__ = "s.celles@gmail.com"
 __status__ = "Development"
+__url__ = 'https://github.com/scls19fr/openweathermap_requests'
 
 ENV_VAR_API_KEY = 'OPEN_WEATHER_MAP_API_KEY'
 

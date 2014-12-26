@@ -5,7 +5,7 @@ from setuptools import setup, find_packages  # Always prefer setuptools over dis
 from codecs import open  # To use a consistent encoding
 from os import path
 
-from openweathermap_requests import __author__, __copyright__, __credits__, __license__, __version__, __maintainer__, __email__, __status__
+from openweathermap_requests import __author__, __copyright__, __credits__, __license__, __version__, __maintainer__, __email__, __status__, __url__
 
 here = path.abspath(path.dirname(__file__))
 
@@ -28,7 +28,7 @@ setup(
     long_description=readme(),
 
     # The project's main homepage.
-    url='https://github.com/scls19fr/openweathermap_requests',
+    url=__url__,
 
     # Author details
     author=__author__,
