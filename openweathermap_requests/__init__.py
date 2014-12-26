@@ -21,7 +21,8 @@ from pandas.io.json import json_normalize
 import collections
 #from bunch import bunchify
 
-from openweathermap_requests.version import __version__
+from openweathermap_requests.version import __author__, __copyright__, __credits__, \
+    __license__, __version__, __maintainer__, __email__, __status__, __url__
 
 ENV_VAR_API_KEY = 'OPEN_WEATHER_MAP_API_KEY'
 
