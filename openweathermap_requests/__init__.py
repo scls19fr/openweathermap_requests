@@ -15,7 +15,6 @@ import pandas as pd
 import numpy as np
 from pandas.io.json import json_normalize
 import collections
-import pprint
 #from bunch import bunchify
 
 ENV_VAR_API_KEY = 'OPEN_WEATHER_MAP_API_KEY'

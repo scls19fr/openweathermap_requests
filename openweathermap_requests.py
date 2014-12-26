@@ -7,6 +7,7 @@ import logging
 import logging.config
 import traceback
 from openweathermap_requests import OpenWeatherMapRequests, ENV_VAR_API_KEY
+import pprint
 
 @click.command()
 #@click.option('--expire_after', default=-1, help=u"Cache expiration (-1: no cache expiration, 0: no cache, d: d seconds expiration cache)")
