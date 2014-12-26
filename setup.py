@@ -5,7 +5,7 @@ from setuptools import setup, find_packages  # Always prefer setuptools over dis
 from codecs import open  # To use a consistent encoding
 from os import path
 
-import openweathermap_requests
+from openweathermap_requests import __author__, __copyright__, __credits__, __license__, __version__, __maintainer__, __email__, __status__
 
 here = path.abspath(path.dirname(__file__))
 
@@ -22,7 +22,7 @@ setup(
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/development.html#single-sourcing-the-version
     #version='0.0.2',
-    version=openweathermap_requests.__version__,
+    version=__version__,
 
     description='openweathermap requests fetch weather history Pandas DataFrame',
     long_description=readme(),
@@ -31,11 +31,11 @@ setup(
     url='https://github.com/scls19fr/openweathermap_requests',
 
     # Author details
-    author='Sebastien Celles',
-    author_email='s.celles@gmail.com',
+    author=__author__,
+    author_email=__email__,
 
     # Choose your license
-    license='BSD',
+    license=__license__,
 
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
