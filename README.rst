@@ -95,3 +95,4 @@ Links
 
 - Documentation can be found at `Read The Docs <http://openweathermap-requests.readthedocs.org/>`__ ;
 - Source code and issue tracking can be found at `GitHub <https://github.com/scls19fr/openweathermap_requests>`__.
+- Feel free to `tip me <https://gratipay.com/scls19fr/>`__!
