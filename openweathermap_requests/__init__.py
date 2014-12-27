@@ -32,7 +32,7 @@ def get_api_key(api_key=''):
             return(os.environ[ENV_VAR_API_KEY])
         except:
             logging.warning("You should get an API key from OpenWeatherMap.org and pass it us using either --api_key or using environment variable %r" % ENV_VAR_API_KEY)
-            return(None)
+            return('')
     else:
         return(api_key)
 
