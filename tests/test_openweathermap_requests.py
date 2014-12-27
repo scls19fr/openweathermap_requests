@@ -8,6 +8,10 @@ from openweathermap_requests import *
 import datetime
 #import logging
 
+def test_version():
+    """Test version"""
+    isinstance(openweathermap_requests.__version__, basestring)
+
 def create_open_weather_map():
     "set up test fixtures"
     #logger = logging.getLogger()
