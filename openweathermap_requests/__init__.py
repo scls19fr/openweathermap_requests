@@ -27,7 +27,7 @@ from .version import __author__, __copyright__, __credits__, \
 ENV_VAR_API_KEY = 'OPEN_WEATHER_MAP_API_KEY'
 
 def get_api_key(api_key=''):
-    if api_key=='':
+    if api_key=='' or api_key is None:
         try:
             return(os.environ[ENV_VAR_API_KEY])
         except:
