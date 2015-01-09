@@ -29,8 +29,10 @@ def test_get_weather():
 def test_find_stations_near():
     (ow, lon, lat) = create_open_weather_map()
     stations = ow.find_stations_near(lon=lon, lat=lat, cnt=1)
-    station_name = stations.iloc[0]['station.name']
-    assert(station_name=='LFBI')
+    #station_name = stations.iloc[0]['station.name']
+    #assert(station_name=='LFBI')
+    distance = stations.iloc[0]['distance']
+    assert(distance<200)
 
 def test_get_historic_weather():
     (ow, lon, lat) = create_open_weather_map()
