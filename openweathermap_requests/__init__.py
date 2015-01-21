@@ -13,7 +13,7 @@ import os
 import logging
 import logging.config
 import traceback
-from urllib import urlencode
+from six.moves.urllib.parse import urlencode
 import json
 import pandas as pd
 import numpy as np
@@ -185,9 +185,9 @@ class OpenWeatherMapRequests(object):
         return(self.BASE_URL + endpoint)
 
     def get_historic_weather(self, station_id, start_date=None, end_date=None, resolution=None):
-        if isinstance(start_date, basestring):
+        if isinstance(start_date, six.string_types):
             start_date = pd.to_datetime(start_date)
-        if isinstance(end_date, basestring):
+        if isinstance(end_date, six.string_types):
             end_date = pd.to_datetime(end_date)
         lst = []
         for i, (start_date, end_date) in enumerate(gen_chunks_start_end_date(start_date, end_date, self.chunksize)):
