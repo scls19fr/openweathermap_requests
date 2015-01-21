@@ -89,6 +89,26 @@ Library Usage
     data = ow.get_historic_weather(station_id, start_date, end_date) # get historic weather from start date to end date
     print(data)
 
+Install
+-------
+
+From Python package index
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+    $ pip install openweathermap_requests
+
+From source
+~~~~~~~~~~~
+
+Get latest version using Git
+
+::
+
+    $ git clone https://github.com/scls19fr/openweathermap_requests.git
+    $ cd openweathermap_requests
+    $ python setup.py install
 
 Links
 -----
