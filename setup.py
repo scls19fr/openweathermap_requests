@@ -9,7 +9,7 @@ import io
 here = path.abspath(path.dirname(__file__))
 
 NAME = 'openweathermap_requests'
-with io.open(path.join(here, NAME, 'version.py'), 'rt') as f:
+with io.open(path.join(here, NAME, 'version.py'), 'rt', encoding='UTF-8') as f:
     exec(f.read())
 
 #from version import __author__, __copyright__, __credits__, \
