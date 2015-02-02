@@ -35,7 +35,7 @@ OpenWeatherMap Requests
 =======================
 
 `Python <https://www.python.org/>`__ package to fetch data from `OpenWeatherMap.org <http://openweathermap.org/>`__ 
-using `Requests <http://docs.python-requests.org/>` and `Requests-cache <https://requests-cache.readthedocs.org>` 
+using `Requests <http://docs.python-requests.org/>`__ and `Requests-cache <https://requests-cache.readthedocs.org>`__ 
 and get `Pandas DataFrame <http://pandas.pydata.org/>`__ with weather history.
 
 Command Line Interface Usage
