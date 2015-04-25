@@ -28,6 +28,10 @@
 .. image:: https://badges.gitter.im/Join%20Chat.svg
    :target: https://gitter.im/scls19fr/openweathermap_requests?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
+.. image:: https://landscape.io/github/scls19fr/openweathermap_requests/master/landscape.svg?style=flat
+   :target: https://landscape.io/github/scls19fr/openweathermap_requests/master
+   :alt: Code Health
+
 .. image:: https://travis-ci.org/scls19fr/openweathermap_requests.svg?branch=master
     :target: https://travis-ci.org/scls19fr/openweathermap_requests
 
