@@ -3,6 +3,7 @@
 
 import click
 import os
+import pandas as pd
 import logging
 import logging.config
 import traceback
