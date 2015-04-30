@@ -18,8 +18,8 @@ import pprint
 @click.option('--lat', default=46.5798114, help=u"Latitude")
 @click.option('--count', default=1, help=u"Weather station count")
 #@click.option('--place', default='Poitiers', help=u"Place")
-@click.option('--range', default='', help=u"Date range (YYYYMMDD:YYYYMMDD) or date (YYYYMMDD) or '' (current weather)")
-def main(api_key, lon, lat, count, range):
+@click.option('--dtrange', default='', help=u"Date range (YYYYMMDD:YYYYMMDD) or date (YYYYMMDD) or '' (current weather)")
+def main(api_key, lon, lat, count, dtrange):
     logging.info("OpenWeatherMaps.org - API fetch with Requests and Requests-cache")
 
     api_key = get_api_key(api_key)
@@ -27,7 +27,7 @@ def main(api_key, lon, lat, count, range):
     pp = pprint.PrettyPrinter(indent=4)
     
     cache_name = 'cache-openweathermap'
-    if range=='':
+    if dtrange=='':
         if count==1:
             #ow = OpenWeatherMapRequests(api_key=api_key, cache_name='openweathermaps-cache', expire_after=datetime.timedelta(minutes=5))
             ow = OpenWeatherMapRequests(api_key=api_key, cache_name=cache_name, expire_after=5*60)
@@ -42,13 +42,13 @@ def main(api_key, lon, lat, count, range):
 
     else:
         ow = OpenWeatherMapRequests(api_key=api_key, cache_name=cache_name, expire_after=None) # no expiration for history
-        range = range.split(':')
-        range = map(pd.to_datetime, range)
-        if len(range)==1:
-            range.append(range[0] + datetime.timedelta(days=1))
+        dtrange = dtrange.split(':')
+        dtrange = map(pd.to_datetime, dtrange)
+        if len(dtrange)==1:
+            dtrange.append(dtrange[0] + datetime.timedelta(days=1))
         logging.info("get_historic_weather")
-        start_date = range[0]
-        end_date = range[1]
+        start_date = dtrange[0]
+        end_date = dtrange[1]
 
         stations = ow.find_stations_near(lon=lon, lat=lat, cnt=1)
         logging.info("\n%s" % stations)
@@ -58,13 +58,13 @@ def main(api_key, lon, lat, count, range):
         logging.info("\n%s" % data)
 
         format = "%Y%m%d"
-        range_str = "%s_%s" % (start_date.strftime(format), end_date.strftime(format))
+        dtrange_str = "%s_%s" % (start_date.strftime(format), end_date.strftime(format))
 
-        filename = "openweathermap_%s_%s_%s.csv" % (lon, lat, range_str)
+        filename = "openweathermap_%s_%s_%s.csv" % (lon, lat, dtrange_str)
         logging.info("Creating file %s" % filename)
         data.to_csv(filename)
 
-        filename = "openweathermap_%s_%s_%s.xls" % (lon, lat, range_str)
+        filename = "openweathermap_%s_%s_%s.xls" % (lon, lat, dtrange_str)
         logging.info("Creating file %s" % filename)
         data.to_excel(filename, engine='openpyxl') # see https://github.com/pydata/pandas/issues/9139
 
