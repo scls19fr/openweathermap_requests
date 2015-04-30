@@ -4,6 +4,7 @@
 import click
 import os
 import pandas as pd
+import datetime
 import logging
 import logging.config
 import traceback
@@ -44,7 +45,7 @@ def main(api_key, lon, lat, count, range):
         range = range.split(':')
         range = map(pd.to_datetime, range)
         if len(range)==1:
-            range.append(range[0]+datetime.timedelta(days=1))
+            range.append(range[0] + datetime.timedelta(days=1))
         logging.info("get_historic_weather")
         start_date = range[0]
         end_date = range[1]

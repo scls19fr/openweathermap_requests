@@ -50,7 +50,7 @@ class RequestsCachedSessionWithLog(requests_cache.CachedSession):
             logging.debug("Request to '%s'" % url)
         else:
             logging.debug("Request to '%s' with '%s' using '%s'" % (url, params, url+'?'+urlencode(params)))
-        response = super(requests_cache.CachedSession, self).get(url, **kwargs)
+        response = super(RequestsCachedSessionWithLog, self).get(url, **kwargs)
         return(response)
 
 def pd_timestamp_to_timestamp(dt, unit='s'):
