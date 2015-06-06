@@ -25,6 +25,9 @@ import collections
 from .version import __author__, __copyright__, __credits__, \
     __license__, __version__, __maintainer__, __email__, __status__, __url__
 
+# resolution
+#   tick, hour, day
+
 ENV_VAR_API_KEY = 'OPEN_WEATHER_MAP_API_KEY'
 
 def get_api_key(api_key=''):
@@ -194,7 +197,7 @@ class OpenWeatherMapRequests(object):
         for i, (start_date, end_date) in enumerate(gen_chunks_start_end_date(start_date, end_date, self.chunksize)):
             try:
                 logging.info("%d: from %s to %s" % (i+1, start_date, end_date))
-                data = self._get_historic_weather(station_id, start_date, end_date)
+                data = self._get_historic_weather(station_id, start_date, end_date, resolution)
                 #logging.info(data)
                 lst.append(data)
                 #time.sleep(2)
@@ -219,9 +222,10 @@ class OpenWeatherMapRequests(object):
         response = self.session.get(url, params=params)
         #if response.status_code!=200:
         #    raise(NotImplementedError("Request error"))
-        data = response.text
-        data = json_loads(data)
-        data = historic_weather_to_df(data)
+        #data = response.text
+        #data = json_loads(data)
+        #data = historic_weather_to_df(data)
+        data = historic_weather_to_df(response.json())
         return(data)
 
     def find_stations_near(self, lon, lat, cnt):
@@ -240,9 +244,10 @@ class OpenWeatherMapRequests(object):
         response = self.session.get(url, params=params)
         #if response.status_code!=200:
         #    raise(NotImplementedError("Request error"))
-        data = response.text
-        data = json_loads(data)
-        data = stations_to_df(data)
+        #data = response.text
+        #data = json_loads(data)
+        #data = stations_to_df(data)
+        data = stations_to_df(response.json())
         return(data)
 
     def get_weather(self, lon, lat):
@@ -259,8 +264,9 @@ class OpenWeatherMapRequests(object):
         response = self.session.get(url, params=params)
         if response.status_code!=200:
             raise(NotImplementedError("Request error"))
-        data = response.text
-        data = json_loads(data)
+        #data = response.text
+        #data = json_loads(data)
+        data = response.json()
         #data = bunchify(data)
         for key in ['temp', 'temp_max', 'temp_min']:
             data['main'][key] = temp_K_to_C(data['main'][key])
