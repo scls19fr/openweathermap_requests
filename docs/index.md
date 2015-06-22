@@ -1,13 +1,14 @@
-[![Latest Version](https://pypip.in/version/openweathermap_requests/badge.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
-[![Supported Python versions](https://pypip.in/py_versions/openweathermap_requests/badge.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
-[![Download format](https://pypip.in/format/openweathermap_requests/badge.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
-[![License](https://pypip.in/license/openweathermap_requests/badge.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
-[![Development Status](https://pypip.in/status/openweathermap_requests/badge.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
+[![Latest Version](https://img.shields.io/pypi/v/openweathermap_requests.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
+[![Supported Python versions](https://img.shields.io/pypi/pyversions/openweathermap_requests.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
+[![Wheel format](https://img.shields.io/pypi/wheel/openweathermap_requests.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
+[![License](https://img.shields.io/pypi/l/openweathermap_requests.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
+[![Development Status](https://img.shields.io/pypi/status/openweathermap_requests.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
+[![Downloads monthly](https://img.shields.io/pypi/dm/openweathermap_requests.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
 [![Documentation Status](https://readthedocs.org/projects/openweathermap-requests/badge/?version=latest)](http://openweathermap-requests.readthedocs.org/en/latest/)
 [![Sourcegraph](https://sourcegraph.com/api/repos/github.com/scls19fr/openweathermap_requests/.badges/status.png)](https://sourcegraph.com/github.com/scls19fr/openweathermap_requests)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/scls19fr/openweathermap_requests?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Code Health](https://landscape.io/github/scls19fr/openweathermap_requests/master/landscape.svg?style=flat)](https://landscape.io/github/scls19fr/openweathermap_requests/master)
-[![Build Status](https://travis-ci.org/scls19fr/openweathermap_requests.svg?branch=master)](https://travis-ci.org/scls19fr/openweathermap_requests)
+[![Build Status](https://travis-ci.org/scls19fr/openweathermap_requests.svg)](https://travis-ci.org/scls19fr/openweathermap_requests)
 
 OpenWeatherMap Requests
 =======================
