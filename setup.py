@@ -23,7 +23,7 @@ setup(
 
     setup_requires=['setuptools-markdown'],
     description='openweathermap requests fetch weather history Pandas DataFrame',
-    long_description=long_description_markdown_filename='README.md',
+    long_description_markdown_filename='README.md',
 
     # The project's main homepage.
     url=__url__,
