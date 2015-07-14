@@ -4,6 +4,7 @@
 [![License](https://img.shields.io/pypi/l/openweathermap_requests.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
 [![Development Status](https://img.shields.io/pypi/status/openweathermap_requests.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
 [![Downloads monthly](https://img.shields.io/pypi/dm/openweathermap_requests.svg)](https://pypi.python.org/pypi/openweathermap_requests/)
+[![Requirements Status](https://requires.io/github/scls19fr/openweathermap_requests/requirements.svg?branch=master)](https://requires.io/github/scls19fr/openweathermap_requests/requirements/?branch=master)
 [![Documentation Status](https://readthedocs.org/projects/openweathermap-requests/badge/?version=latest)](http://openweathermap-requests.readthedocs.org/en/latest/)
 [![Sourcegraph](https://sourcegraph.com/api/repos/github.com/scls19fr/openweathermap_requests/.badges/status.png)](https://sourcegraph.com/github.com/scls19fr/openweathermap_requests)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/scls19fr/openweathermap_requests?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
