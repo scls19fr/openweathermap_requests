@@ -50,5 +50,9 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# Mac OS X
+.DS_Store
+
 # PyBuilder
 target/
+cache.sqlite
