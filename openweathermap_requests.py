@@ -43,7 +43,7 @@ def main(api_key, lon, lat, count, dtrange):
     else:
         ow = OpenWeatherMapRequests(api_key=api_key, cache_name=cache_name, expire_after=None) # no expiration for history
         dtrange = dtrange.split(':')
-        dtrange = map(pd.to_datetime, dtrange)
+        dtrange = list(map(pd.to_datetime, dtrange))
         if len(dtrange)==1:
             dtrange.append(dtrange[0] + datetime.timedelta(days=1))
         logging.info("get_historic_weather")
