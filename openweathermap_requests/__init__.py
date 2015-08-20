@@ -16,11 +16,14 @@ import traceback
 import six
 from six.moves.urllib.parse import urlencode
 import json
-import pandas as pd
-import numpy as np
 from pandas.io.json import json_normalize
 import collections
-#from bunch import bunchify
+
+try:
+    import pandas as pd
+    _PANDAS_INSTALLED = True
+except ImportError:
+    _PANDAS_INSTALLED = False
 
 from .version import __author__, __copyright__, __credits__, \
     __license__, __version__, __maintainer__, __email__, __status__, __url__
@@ -185,8 +188,28 @@ class OpenWeatherMapRequests(object):
         self.session.mount('http://', a)
         self.session.mount('https://', b)
 
+        self.to_dataframe = True
+
     def _url(self, endpoint):
         return(self.BASE_URL + endpoint)
+
+    @property
+    def _return_dataframe(self):
+        return _PANDAS_INSTALLED and self.to_dataframe
+
+    def _get(self, endpoint, params):
+        url = self._url(endpoint)
+        response = self.session.get(url, params=params)
+        response = self._parse_response(response)
+        return response
+
+    def _parse_response(self, response):
+        status_code = response.status_code
+        if status_code == 200:
+            response = response.json()
+            return response
+        else:
+            raise(Exception("HTTP status code is %d" % status_code))
 
     def get_historic_weather(self, station_id, start_date=None, end_date=None, resolution=None):
         if isinstance(start_date, six.string_types):
@@ -201,11 +224,17 @@ class OpenWeatherMapRequests(object):
                 #logging.info(data)
                 lst.append(data)
                 #time.sleep(2)
+            except KeyboardInterrupt:
+                logging.error("KeyboardInterrupt")
+                break
             except:
                 logging.error(traceback.format_exc())
         logging.info("Build concatenated DataFrame")
-        df_all = pd.concat(lst)
-        return(df_all)
+        if self._return_dataframe:
+            df_all = pd.concat(lst)
+            return(df_all)
+        else:
+            return(lst)
 
     def _get_historic_weather(self, station_id, start_date=None, end_date=None, resolution=None):
         if resolution is None:
@@ -218,14 +247,9 @@ class OpenWeatherMapRequests(object):
             'start': datetime_to_timestamp(start_date),
             'end': datetime_to_timestamp(end_date) - 1
         }
-        url = self._url(endpoint)
-        response = self.session.get(url, params=params)
-        #if response.status_code!=200:
-        #    raise(NotImplementedError("Request error"))
-        #data = response.text
-        #data = json_loads(data)
-        #data = historic_weather_to_df(data)
-        data = historic_weather_to_df(response.json())
+        data = self._get(endpoint, params)
+        if self._return_dataframe:
+            data = historic_weather_to_df(data)
         return(data)
 
     def find_stations_near(self, lon, lat, cnt):
@@ -240,14 +264,9 @@ class OpenWeatherMapRequests(object):
             'lon': lon,
             'cnt': cnt,
         }
-        url = self._url(endpoint)
-        response = self.session.get(url, params=params)
-        #if response.status_code!=200:
-        #    raise(NotImplementedError("Request error"))
-        #data = response.text
-        #data = json_loads(data)
-        #data = stations_to_df(data)
-        data = stations_to_df(response.json())
+        data = self._get(endpoint, params)
+        if self._return_dataframe:
+            data = stations_to_df(data)
         return(data)
 
     def get_weather(self, lon, lat):
@@ -260,17 +279,11 @@ class OpenWeatherMapRequests(object):
             'lat': lat,
             'lon': lon,
         }
-        url = self._url(endpoint)
-        response = self.session.get(url, params=params)
-        if response.status_code!=200:
-            raise(NotImplementedError("Request error"))
-        #data = response.text
-        #data = json_loads(data)
-        data = response.json()
-        #data = bunchify(data)
+        data = self._get(endpoint, params)
         for key in ['temp', 'temp_max', 'temp_min']:
             data['main'][key] = temp_K_to_C(data['main'][key])
-        data['dt'] = pd.to_datetime(data['dt'], unit='s')
-        data['sys']['sunrise'] = pd.to_datetime(data['sys']['sunrise'], unit='s')
-        data['sys']['sunset'] = pd.to_datetime(data['sys']['sunset'], unit='s')
+        if _PANDAS_INSTALLED:
+            data['dt'] = pd.to_datetime(data['dt'], unit='s')
+            data['sys']['sunrise'] = pd.to_datetime(data['sys']['sunrise'], unit='s')
+            data['sys']['sunset'] = pd.to_datetime(data['sys']['sunset'], unit='s')
         return(data)
