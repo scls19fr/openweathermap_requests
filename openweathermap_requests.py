@@ -17,9 +17,9 @@ import pprint
 @click.option('--lon', default=0.34189, help=u"Longitude")
 @click.option('--lat', default=46.5798114, help=u"Latitude")
 @click.option('--count', default=1, help=u"Weather station count")
-#@click.option('--place', default='Poitiers', help=u"Place")
+@click.option('--place', default='', help=u"Place") # Paris,FR
 @click.option('--dtrange', default='', help=u"Date range (YYYYMMDD:YYYYMMDD) or date (YYYYMMDD) or '' (current weather)")
-def main(api_key, lon, lat, count, dtrange):
+def main(api_key, lon, lat, place, count, dtrange):
     logging.info("OpenWeatherMaps.org - API fetch with Requests and Requests-cache")
 
     api_key = get_api_key(api_key)
@@ -50,12 +50,16 @@ def main(api_key, lon, lat, count, dtrange):
         start_date = dtrange[0]
         end_date = dtrange[1]
 
-        stations = ow.find_stations_near(lon=lon, lat=lat, cnt=1)
-        logging.info("\n%s" % stations)
-        station_id = stations.iloc[0]['station.id']
+        if place == '': # by lat / lon
+            stations = ow.find_stations_near(lon=lon, lat=lat, cnt=1)
+            logging.info("\n%s" % stations)
+            station_id = stations.iloc[0]['station.id']
 
-        data = ow.get_historic_weather(station_id, start_date, end_date)
-        logging.info("\n%s" % data)
+            data = ow.get_historic_weather(station_id, start_date, end_date)
+            logging.info("\n%s" % data)
+        else: # by place
+            data = ow.get_historic_weather(place, start_date, end_date)
+            logging.info("\n%s" % data)
 
         format = "%Y%m%d"
         dtrange_str = "%s_%s" % (start_date.strftime(format), end_date.strftime(format))
@@ -64,9 +68,10 @@ def main(api_key, lon, lat, count, dtrange):
         logging.info("Creating file %s" % filename)
         data.to_csv(filename)
 
-        filename = "openweathermap_%s_%s_%s.xls" % (lon, lat, dtrange_str)
-        logging.info("Creating file %s" % filename)
-        data.to_excel(filename, engine='openpyxl') # see https://github.com/pydata/pandas/issues/9139
+        #filename = "openweathermap_%s_%s_%s.xls" % (lon, lat, dtrange_str)
+        #logging.info("Creating file %s" % filename)
+        #data.to_excel(filename)
+        #data.to_excel(filename, engine='openpyxl') # see https://github.com/pydata/pandas/issues/9139
 
 if __name__ == '__main__':
     basepath = os.path.dirname(__file__)

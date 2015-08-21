@@ -25,11 +25,18 @@ Get current weather data
 
     $ python openweathermap_requests.py --lon 0.34189 --lat 46.5798114
 
-### Historical weather data
+### Historical weather data by lat/lon
 
-Fetch historical weather data from nearest weather station of coordinates (lon=0.34189, lat=46.5798114) from 2014/01/01 to 2014/12/01 using:
+Fetch historical weather data from nearest weather station of coordinates (lon=0.34189, lat=46.5798114) using:
 
-    $ python openweathermap_requests.py --lon 0.34189 --lat 46.5798114 --dtrange 20140101:20141201
+    $ python openweathermap_requests.py --lon 0.34189 --lat 46.5798114 --dtrange 20150101:20150801
+
+### Historical weather data by place
+
+Fetch historical weather data by place name using:
+
+    $ python openweathermap_requests.py --place Poitiers,FR --dtrange 20150101:20150801
+
 
 Library Usage
 -------------
@@ -41,6 +48,8 @@ Library Usage
     from openweathermap_requests import OpenWeatherMapRequests
 
     ow = OpenWeatherMapRequests(api_key='', cache_name='cache-openweathermap', expire_after=5*60)
+
+    # Historic weather by lat/lon
 
     (lon, lat) = (0.34189, 46.5798114) # Poitiers
 
@@ -54,8 +63,14 @@ Library Usage
     start_date = datetime.datetime(2014, 1, 1)
     end_date = datetime.datetime(2014, 6, 1)
 
-    data = ow.get_historic_weather(station_id, start_date, end_date) # get historic weather from start date to end date
+    data = ow.get_historic_weather(station_id, start_date, end_date) # get historic weather from start date to end date by station_id
     print(data)
+    
+    # Historic weather by place
+    place = 'Poitiers,FR'
+    data = ow.get_historic_weather(place, start_date, end_date) # get historic weather from start date to end date by place
+    print(data)
+    
 
 Install
 -------

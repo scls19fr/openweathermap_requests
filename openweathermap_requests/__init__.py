@@ -117,7 +117,10 @@ def historic_weather_to_df(data):
     data = data['list']
     if len(data)==0:
         raise(Exception("Empty list"))
+    #print(data)
+    #data['weather'] = data['weather'][0]
     df = json_normalize(data)
+    #df['weather'] = df['weather'].map(lambda lst: lst[0])
     df['dt'] = pd.to_datetime(df['dt'], unit='s')
     for col in df.columns:
         if 'temp.' in col and 'temp.c' not in col\
@@ -211,16 +214,23 @@ class OpenWeatherMapRequests(object):
         else:
             raise(Exception("HTTP status code is %d" % status_code))
 
-    def get_historic_weather(self, station_id, start_date=None, end_date=None, resolution=None):
+    def get_historic_weather(self, id, start_date=None, end_date=None, resolution=None):
         if isinstance(start_date, six.string_types):
             start_date = pd.to_datetime(start_date)
         if isinstance(end_date, six.string_types):
             end_date = pd.to_datetime(end_date)
+        
+        if isinstance(id, six.string_types): # id is string -> place
+            _get_historic_weather = self._get_historic_weather_by_place_raw
+        else: # id is int -> station_id
+            _get_historic_weather = self._get_historic_weather_by_station_id_raw
+
         lst = []
         for i, (start_date, end_date) in enumerate(gen_chunks_start_end_date(start_date, end_date, self.chunksize)):
             try:
                 logging.info("%d: from %s to %s" % (i+1, start_date, end_date))
-                data = self._get_historic_weather(station_id, start_date, end_date, resolution)
+                #data = self._get_historic_weather_by_station_id_raw(id, start_date, end_date, resolution)
+                data = _get_historic_weather(id, start_date, end_date, resolution)
                 #logging.info(data)
                 lst.append(data)
                 #time.sleep(2)
@@ -236,13 +246,29 @@ class OpenWeatherMapRequests(object):
         else:
             return(lst)
 
-    def _get_historic_weather(self, station_id, start_date=None, end_date=None, resolution=None):
+    def _get_historic_weather_by_station_id_raw(self, station_id, start_date=None, end_date=None, resolution=None):
         if resolution is None:
             resolution = 'hour'
         endpoint = '/history/station'
         params = {
             'appid': self.api_key,
             'id': station_id,
+            'type': resolution,
+            'start': datetime_to_timestamp(start_date),
+            'end': datetime_to_timestamp(end_date) - 1
+        }
+        data = self._get(endpoint, params)
+        if self._return_dataframe:
+            data = historic_weather_to_df(data)
+        return(data)
+
+    def _get_historic_weather_by_place_raw(self, place, start_date=None, end_date=None, resolution=None):
+        if resolution is None:
+            resolution = 'hour'
+        endpoint = '/history/city'
+        params = {
+            'appid': self.api_key,
+            'q': place,
             'type': resolution,
             'start': datetime_to_timestamp(start_date),
             'end': datetime_to_timestamp(end_date) - 1
