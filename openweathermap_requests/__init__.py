@@ -123,11 +123,12 @@ def historic_weather_to_df(data):
     #df['weather'] = df['weather'].map(lambda lst: lst[0])
     df['dt'] = pd.to_datetime(df['dt'], unit='s')
     for col in df.columns:
-        if 'temp.' in col and 'temp.c' not in col\
-                or 'temp_max' in col\
-                or 'calc.dewpoint' in col and 'calc.dewpoint.c' not in col\
-                or 'calc.heatindex' in col and 'calc.heatindex.c' not in col\
-                or 'calc.humidex' in col and 'calc.humidex.c' not in col:
+        #if 'temp.' in col and 'temp.c' not in col\
+        #        or 'temp_max' in col\
+        #        or 'calc.dewpoint' in col and 'calc.dewpoint.c' not in col\
+        #        or 'calc.heatindex' in col and 'calc.heatindex.c' not in col\
+        #        or 'calc.humidex' in col and 'calc.humidex.c' not in col:
+        if col in ['main.temp', 'main.temp_max', 'main.temp_min']:
             df[col] = df[col].map(temp_K_to_C)
     df = df.set_index('dt')
     return(df)
