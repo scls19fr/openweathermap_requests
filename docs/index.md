@@ -86,6 +86,11 @@ Get latest version using Git
     $ git clone https://github.com/scls19fr/openweathermap_requests.git
     $ cd openweathermap_requests
     $ python setup.py install
+    
+or
+
+    $ pip install git+https://github.com/scls19fr/openweathermap_requests.git
+
 
 Links
 -----
