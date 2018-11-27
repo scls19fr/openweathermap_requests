@@ -9,7 +9,7 @@
 [![Sourcegraph](https://sourcegraph.com/api/repos/github.com/scls19fr/openweathermap_requests/.badges/status.png)](https://sourcegraph.com/github.com/scls19fr/openweathermap_requests)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/scls19fr/openweathermap_requests?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Code Health](https://landscape.io/github/scls19fr/openweathermap_requests/master/landscape.svg?style=flat)](https://landscape.io/github/scls19fr/openweathermap_requests/master)
-[![Build Status](https://travis-ci.org/scls19fr/openweathermap_requests.svg)](https://travis-ci.org/scls19fr/openweathermap_requests)
+[![Build Status](https://travis-ci.com/scls19fr/openweathermap_requests.svg)](https://travis-ci.com/scls19fr/openweathermap_requests)
 
 OpenWeatherMap Requests
 =======================
